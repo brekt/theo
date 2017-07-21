@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <script src="./dist/vendor/three.min.js"></script>
+  <script>
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 10000);
+  camera.position.z = 1000;
+  const renderer = new THREE.WebGLRenderer();
+  const material = new THREE.MeshBasicMaterial({color: 0xfffff, wireframe: true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+  class Polyhedron {
+    constructor(faceCount = 6, radius = 512) {
+      this.faceCount = faceCount;
+      this.radius = radius;
+      switch (faceCount) {
+        case 4:
+          this.vertexCount = 4;
+          this.edgeCount = 6;
+
+          break;
+        case 5:
+          this.vertexCount = 5;
+          this.edgeCount = 8;
+          break;
+        case 6:
+          this.vertexCount = 8;
+          this.edgeCount = 12;
+          this.geometry = new THREE.BoxGeometry(radius, radius, radius);
+          this.mesh = new THREE.Mesh(this.geometry, material);
+          break;
+        case 7:
+          this.vertexCount = 10;
+          this.edgeCount = 15;
+          break;
+        case 8:
+          this.vertexCount = 6;
+          this.edgeCount = 12;
+          break;
+        case 9:
+          break;
+        case 10:
+          break;
+        case 11:
+          break;
+        case 12:
+          break;
+        default:
+          // cube
+          this.vertexCount = 8;
+          this.edgeCount = 12;
+        }
+      }
+    }
+    const cube = new Polyhedron(6, 512);
+    scene.add(cube.mesh);
+    function render() {
+      requestAnimationFrame(render);
+      cube.mesh.rotation.x += 0.001;
+      cube.mesh.rotation.y += 0.001;
+      renderer.render(scene, camera);
+    }
+    render();
+  </script>
+</body>
+</html>
