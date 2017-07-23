@@ -11,14 +11,15 @@
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
   class Polyhedron {
-    constructor(faceCount = 6, radius = 512) {
+    constructor(faceCount = 6, radius = 512, detail=0) {
       this.faceCount = faceCount;
       this.radius = radius;
       switch (faceCount) {
         case 4:
           this.vertexCount = 4;
           this.edgeCount = 6;
-
+					this.geometry = new THREE.TetrahedronGeometry(radius, detail);
+					this.mesh = new THREE.Mesh(this.geometry, material);
           break;
         case 5:
           this.vertexCount = 5;
@@ -53,7 +54,8 @@
         }
       }
     }
-    const cube = new Polyhedron(6, 512);
+    // const cube = new Polyhedron(6, 512);
+		const cube = new Polyhedron(4, 512);
     scene.add(cube.mesh);
     function render() {
       requestAnimationFrame(render);
