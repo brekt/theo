@@ -19,17 +19,33 @@
           this.vertexCount = 4;
           this.edgeCount = 6;
 					this.geometry = new THREE.TetrahedronGeometry(radius, detail);
-					this.mesh = new THREE.Mesh(this.geometry, material);
           break;
         case 5:
           this.vertexCount = 5;
           this.edgeCount = 8;
+					this.geometry = new THREE.Geometry();
+					this.geometry.vertices = [
+    				new THREE.Vector3(-0.5, -0.5, 0),
+    				new THREE.Vector3(-0.5, 0.5, 0),
+    				new THREE.Vector3(0.5, 0.5, 0),
+    				new THREE.Vector3(0.5, -0.5, 0),
+    				new THREE.Vector3(0, 0, 1)
+					];
+					this.geometry.faces = [
+				    new THREE.Face3(0, 1, 2),
+				    new THREE.Face3(0, 2, 3),
+				    new THREE.Face3(1, 0, 4),
+				    new THREE.Face3(2, 1, 4),
+				    new THREE.Face3(3, 2, 4),
+				    new THREE.Face3(0, 3, 4)
+					];
+					const transformation = new THREE.Matrix4().makeScale(radius, radius, radius);
+					this.geometry.applyMatrix(transformation);
           break;
         case 6:
           this.vertexCount = 8;
           this.edgeCount = 12;
           this.geometry = new THREE.BoxGeometry(radius, radius, radius);
-          this.mesh = new THREE.Mesh(this.geometry, material);
           break;
         case 7:
           this.vertexCount = 10;
@@ -52,15 +68,15 @@
           this.vertexCount = 8;
           this.edgeCount = 12;
         }
+				this.mesh = new THREE.Mesh(this.geometry, material);
       }
     }
-    // const cube = new Polyhedron(6, 512);
-		const cube = new Polyhedron(4, 512);
-    scene.add(cube.mesh);
+		const poly = new Polyhedron(5, 512);
+    scene.add(poly.mesh);
     function render() {
       requestAnimationFrame(render);
-      cube.mesh.rotation.x += 0.001;
-      cube.mesh.rotation.y += 0.001;
+      poly.mesh.rotation.x += 0.001;
+      poly.mesh.rotation.y += 0.001;
       renderer.render(scene, camera);
     }
     render();
