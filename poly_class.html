@@ -92,6 +92,7 @@
         case 8:
           this.vertexCount = 6;
           this.edgeCount = 12;
+          this.geometry = new THREE.OctahedronGeometry(radius / 2, detail);
           break;
         case 9:
           break;
@@ -109,7 +110,7 @@
 				this.mesh = new THREE.Mesh(this.geometry, material);
       }
     }
-		const poly = new Polyhedron(7, 512);
+		const poly = new Polyhedron(8, 512);
     scene.add(poly.mesh);
     function render() {
       requestAnimationFrame(render);
