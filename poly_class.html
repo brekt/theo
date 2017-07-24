@@ -152,6 +152,14 @@
           this.geometry.applyMatrix(this.transformation);
           break;
         case 10:
+          this.vertexCount = 16;
+          this.edgeCount = 24;
+          this.geometry = new THREE.Geometry();
+          segLength = 0.5;
+          ang = 2 * Math.PI / 8;
+          yAxis = new THREE.Vector3(0, 1, 0);
+          ver0 = new THREE.Vector3(0, segLength, segLength);
+          yShift = new THREE.Vector3(0, -1 * segLength, 0);
           break;
         case 11:
           break;
