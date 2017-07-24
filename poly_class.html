@@ -39,8 +39,8 @@
 				    new THREE.Face3(3, 2, 4),
 				    new THREE.Face3(0, 3, 4)
 					];
-					const transformation = new THREE.Matrix4().makeScale(radius, radius, radius);
-					this.geometry.applyMatrix(transformation);
+					this.transformation = new THREE.Matrix4().makeScale(radius, radius, radius);
+					this.geometry.applyMatrix(this.transformation);
           break;
         case 6:
           this.vertexCount = 8;
@@ -50,6 +50,44 @@
         case 7:
           this.vertexCount = 10;
           this.edgeCount = 15;
+          this.geometry = new THREE.Geometry();
+          const segLength = 0.5;
+          const ang = 2 * Math.PI / 5;
+          const yAxis = new THREE.Vector3(0, 1, 0);
+          const ver0 = new THREE.Vector3(0, segLength, segLength);
+          const yShift = new THREE.Vector3(0, -1 * segLength, 0);
+          this.geometry.vertices = [
+            ver0,
+            ver0.clone().applyAxisAngle(yAxis, ang),
+            ver0.clone().applyAxisAngle(yAxis, 2 * ang),
+            ver0.clone().applyAxisAngle(yAxis, 3 * ang),
+            ver0.clone().applyAxisAngle(yAxis, 4 * ang),
+            ver0.clone().add(yShift),
+            ver0.clone().add(yShift).applyAxisAngle(yAxis, ang),
+            ver0.clone().add(yShift).applyAxisAngle(yAxis, 2 * ang),
+            ver0.clone().add(yShift).applyAxisAngle(yAxis, 3 * ang),
+            ver0.clone().add(yShift).applyAxisAngle(yAxis, 4 * ang),
+          ];
+          this.geometry.faces = [
+            new THREE.Face3(0, 1, 2),
+            new THREE.Face3(0, 2, 3),
+            new THREE.Face3(0, 3, 4),
+            new THREE.Face3(0, 1, 5),
+            new THREE.Face3(1, 5, 6),
+            new THREE.Face3(1, 2, 7),
+            new THREE.Face3(1, 6, 7),
+            new THREE.Face3(2, 3, 7),
+            new THREE.Face3(3, 7, 8),
+            new THREE.Face3(3, 4, 8),
+            new THREE.Face3(4, 8, 9),
+            new THREE.Face3(0, 4, 9),
+            new THREE.Face3(0, 5, 9),
+            new THREE.Face3(5, 6, 7),
+            new THREE.Face3(5, 7, 8),
+            new THREE.Face3(5, 8, 9)
+          ];
+          this.transformation = new THREE.Matrix4().makeScale(radius, radius, radius);
+          this.geometry.applyMatrix(this.transformation);
           break;
         case 8:
           this.vertexCount = 6;
@@ -71,7 +109,7 @@
 				this.mesh = new THREE.Mesh(this.geometry, material);
       }
     }
-		const poly = new Polyhedron(5, 512);
+		const poly = new Polyhedron(7, 512);
     scene.add(poly.mesh);
     function render() {
       requestAnimationFrame(render);
