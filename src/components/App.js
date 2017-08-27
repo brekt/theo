@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import Scene from './Scene.js';
+import Theo from './Theo';
 
 export default class App extends Component {
 	render() {
 		return (
-			<div id="container">
-				<Scene />
-			</div>
+			<Theo />
 		);
 	}
 }

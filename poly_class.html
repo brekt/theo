@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <script src="./dist/vendor/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
   <script>
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 10000);
@@ -173,12 +173,13 @@
 				this.mesh = new THREE.Mesh(this.geometry, material);
       }
     }
-		const poly = new Polyhedron(9, 512);
+		// const poly = new Polyhedron(9, 512);
+		const poly = new Polyhedron(8, 512);
     scene.add(poly.mesh);
     function render() {
       requestAnimationFrame(render);
-      poly.mesh.rotation.x += 0.001;
-      poly.mesh.rotation.y += 0.001;
+      // poly.mesh.rotation.x += 0.01;
+      poly.mesh.rotation.y += 0.01;
       renderer.render(scene, camera);
     }
     render();
