@@ -51,16 +51,17 @@ export default class Theo extends React.Component {
 				/>
 				<mesh
 					rotation={this.state.rotation}
+					scale={new THREE.Vector3(1, 1.5, 1)}
 				>
 					<octahedronGeometry
-						radius={512}
+						radius={256}
 						detail={0}
 					/>
 					<meshPhongMaterial
-						color={0x00ffff}
+						color={0x93FF93}
 						specular={0x111111}
 						emissive={0x000000}
-						shininess={40}
+						shininess={30}
 						shading={THREE.FlatShading}
 						wireframe={false}
 						side={THREE.DoubleSide}
