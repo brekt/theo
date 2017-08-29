@@ -11,6 +11,7 @@ export default class Theo extends React.Component {
 		this.state = {
 			xRotDirection: 'pos',
 			rotation: new THREE.Euler(),
+			modalOpen: false,
 		};
 		this.xRotDelta = 0.001;
 		this._onAnimate = () => {
@@ -30,50 +31,60 @@ export default class Theo extends React.Component {
 			});
 		};
 	}
-
+	handleClick() {
+		// open modal
+		console.log('theo clicked');
+	}
 	render() {
 		const width = window.innerWidth; // canvas width
 		const height = window.innerHeight; // canvas height
-		return (<React3
-			mainCamera="camera" // this points to the perspectiveCamera which has the name set to "camera" below
-			width={width}
-			height={height}
-			onAnimate={this._onAnimate}
-		>
-			<scene>
-				<perspectiveCamera
-					name="camera"
-					fov={75}
-					aspect={width / height}
-					near={0.1}
-					far={10000}
-					position={this.cameraPosition}
-				/>
-				<mesh
-					rotation={this.state.rotation}
-					scale={new THREE.Vector3(1, 1.5, 1)}
+		return (
+			<div onClick={this.handleClick}>
+				<React3
+				mainCamera="camera" // this points to the perspectiveCamera which has the name set to "camera" below
+				width={width}
+				height={height}
+				onAnimate={this._onAnimate}
 				>
-					<octahedronGeometry
-						radius={256}
-						detail={0}
-					/>
-					<meshPhongMaterial
-						color={0x93FF93}
-						specular={0x111111}
-						emissive={0x000000}
-						shininess={30}
-						shading={THREE.FlatShading}
-						wireframe={false}
-						side={THREE.DoubleSide}
-					/>
-				</mesh>
-				<ambientLight color={0x505050} />
-				<directionalLight
-					color={0xffffff}
-					position={this.lightPosition}
-					lookAt={this.lightTarget}
-				/>
-			</scene>
-		</React3>);
+					<scene>
+						<perspectiveCamera
+							name="camera"
+							fov={75}
+							aspect={width / height}
+							near={0.1}
+							far={10000}
+							position={this.cameraPosition}
+						/>
+						<mesh
+							rotation={this.state.rotation}
+							scale={new THREE.Vector3(1, 1.5, 1)}
+						>
+							<octahedronGeometry
+								radius={256}
+								detail={0}
+							/>
+							<meshPhongMaterial
+								color={0x93ccff}
+								specular={0x111111}
+								emissive={0x000000}
+								shininess={30}
+								shading={THREE.FlatShading}
+								wireframe={false}
+								side={THREE.DoubleSide}
+								opacity={0.5}
+								transparent={true}
+								depthWrite={false}
+							/>
+						</mesh>
+						<ambientLight color={0x505050} />
+						<directionalLight
+							color={0xffffff}
+							position={this.lightPosition}
+							lookAt={this.lightTarget}
+						/>
+					</scene>
+				</React3>
+			</div>
+		);
 	}
 }
