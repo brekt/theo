@@ -7,10 +7,11 @@ export default class Modal extends React.Component {
 		super(props);
 	}
 	render () {
-		const modalStyle = this.props.modalOpen ? modalStyles.visible : modalStyles.hidden;
-		console.log(modalStyle);
+		const { visible, hidden, closeButtonStyle } = modalStyles;
+		const modalStyle = this.props.modalOpen ? visible : hidden;
 		return(
 			<div style={modalStyle}>
+				<div style={closeButtonStyle}>X</div>
 				<ul>
 					<li>Donee</li>
 					<li>Donee</li>
