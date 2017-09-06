@@ -14,6 +14,9 @@ export default class App extends Component {
 	openModal() {
 		this.setState({modalOpen: true});
 	}
+	closeModal() {
+		this.setState({modalOpen: false});
+	}
 	render() {
 		return (
 			<div>
@@ -22,6 +25,7 @@ export default class App extends Component {
 				/>
 				<Modal
 					modalOpen={this.state.modalOpen}
+					closeModal={() => this.closeModal()}
 				/>
 			</div>
 		);

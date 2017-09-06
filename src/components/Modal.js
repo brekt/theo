@@ -11,7 +11,7 @@ export default class Modal extends React.Component {
 		const modalStyle = this.props.modalOpen ? visible : hidden;
 		return(
 			<div style={modalStyle}>
-				<div style={closeButtonStyle}>X</div>
+				<div style={closeButtonStyle} onClick={this.props.closeModal}>X</div>
 				<ul>
 					<li>Donee</li>
 					<li>Donee</li>
@@ -26,4 +26,5 @@ export default class Modal extends React.Component {
 Modal.propTypes = {
 	donees: PropTypes.array,
 	modalOpen: PropTypes.bool,
+	closeModal: PropTypes.func,
 };
